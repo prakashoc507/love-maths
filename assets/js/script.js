@@ -1,4 +1,4 @@
-//wit for the DOM to finish loading before running the game
+//wait for the DOM to finish loading before running the game
 //Get the button elements and add event listeners to them
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -31,11 +31,14 @@ function runGame(gameType) {
 
     if (gameType === "addition") {
         displayAdditionQuestion(num1, num2);
+    } else if (gameType === "multiply") {
+        displayMultiplyQuestion(num1, num2)
     } else {
         alert(`Unknown game type: ${gameType}`);
         throw `Unknown game type: ${gameType}. Aborting`;
     }
 }
+
 
 /**
  * Checks the answer agains the first element in
@@ -48,7 +51,7 @@ function checkAnswer() {
     let isCorrect = userAnswer === calculatedAnswer[0];
 
     if (isCorrect) {
-        alert("Hey! You got it right! :D"); 
+        alert("Hey! You got it right! :D");
         incrementScore();
     } else {
         alert(`Aww.... you answered ${userAnswer}. The correct answer is ${calculatedAnswer[0]}!`);
@@ -71,7 +74,8 @@ function calculateCorrectAnswer() {
 
     if (operator === "+") {
         return [operand1 + operand2, "addition"];
-    } else {
+    } else if (operator === "x") {
+        return [operand1 * operand2, "multiply"];
         alert(`Unimplemented operator ${operator}`);
         throw `Unimplemented operator ${operator}. Aborting!`;
     }
@@ -109,6 +113,10 @@ function displaySubtractQuestion() {
 
 }
 
-function displayMultiplyQuestion() {
+function displayMultiplyQuestion(operand1, operand2) {
+
+    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operator').textContent = "x";
 
 }
